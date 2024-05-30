@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import ImageCard from './components/ImageCard'
 import './App.css'
 
 function App () {
@@ -14,13 +15,22 @@ function App () {
       .then(results => {
         const { data } = results
         setGifs(data)
-      }).catch(err => console.log(err))
+      })
+      .catch(err => console.log(err))
   }, [])
   return (
     <>
       <div>
         <h1 className='Title'>Giphy App</h1>
-        
+        <div className='grid-cards'>
+          {gifs.map(gif => (
+            <ImageCard
+              key={gif.index}
+              url={gif.images.fixed_height.url}
+              title={gif.title}
+            />
+          ))}
+        </div>
       </div>
     </>
   )
