@@ -1,10 +1,18 @@
 import { useState } from 'react'
+import ToDoItem from './ToDoItem'
 
 const ToDoList = () => {
   // States are used to save information and are used to update the view automatically
   const [inputValue, setInputValue] = useState('')
+  const [todos, setTodos] = useState([])
   const handledAdd = () => {
-    console.log('Add', inputValue)
+    if (inputValue.trim()) {
+      setTodos([...todos, inputValue])
+      setInputValue('')
+    }
+  }
+  const handleDelete = index => {
+    setTodos(todos.filter((todo, i) => i !== index))
   }
   return (
     <>
@@ -17,15 +25,14 @@ const ToDoList = () => {
       />
       <button onClick={handledAdd}>Agregar</button>
       <ul>
-        <li>
-          Item 1<button>Eliminar</button>
-        </li>
-        <li>
-          Item 2<button>Eliminar</button>
-        </li>
-        <li>
-          Item 3<button>Eliminar</button>
-        </li>
+        {/* Iterar el arreglo de todos y regresar un componente para cada uno - Usando una funcion anonima podemos pasar parametros al componente */}
+        {todos.map((todo, index) => (
+          <ToDoItem
+            key={index}
+            todo={todo}
+            handleDelete={() => handleDelete(index)}
+          />
+        ))}
       </ul>
     </>
   )
