@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import SearchBar from '../components/SearchBar.jsx'
+import { Link } from 'react-router-dom'
+
 const Home = () => {
   const [pokemon, setPokemon] = useState([])
   const [mySearch, setMySearch] = useState('')
@@ -33,7 +35,7 @@ const Home = () => {
               <div className='col-sm-3 mb-3 mb-sm-0' key={i}>
                 <div className='card justify-content-center'>
                   <div className='card-body justify-content-center'>
-                    <h5 className='card-title'>{p.name}</h5>
+                    <Link to={`/pokemon/${p.name}`}><h5 className='card-title'>{p.name}</h5></Link>
                     <img
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${
                         p.url.split('/')[6]
