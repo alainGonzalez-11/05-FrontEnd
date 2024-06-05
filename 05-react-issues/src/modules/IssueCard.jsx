@@ -4,30 +4,23 @@ import '../../node_modules/bootstrap-icons/font/bootstrap-icons.css'
 
 const IssueCard = ({ issue }) => {
   return (
-    <article className='container bg-light pt-3 ps-4 pe-4 col-10 text-start'>
-      <div className='row'>
-        <h2 className='header-6 col-8'>Issue</h2>
-        <p className='text-dark col-4 text-end'>Id: #1314242</p>
-      </div>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga blanditiis
-        voluptates alias eligendi quisquam laborum nemo! Cum iure dolores rem ab
-        a, nobis et illum magni suscipit ducimus nesciunt eius praesentium
-        cumque, non inventore excepturi voluptatibus quibusdam doloribus labore
-        eaque quis architecto optio nisi illo.
-      </p>
+    <article className='container bg-light pt-3 ps-4 pe-4 text-start justify-content-center m-3'>
+      <a className='row text-dark' href={issue.html_url}>
+        <h2 className='header-6 col-8'>{issue.title}</h2>
+        <p className='text-dark col-4 text-end'>Id: #{issue.id}</p>
+      </a>
+      <p>{issue.body}</p>
       <div className='row g-2'>
-        <div className='rounded-pill p-1 m-1 bg-primary text-center text-light col-2'>
-          Sterred
-        </div>
-        <div className='rounded-pill p-1 m-1 bg-primary text-center text-light col-2'>
-          Sterred
-        </div>
+        {issue.labels.map(label => (
+          <div className='rounded-pill p-1 m-1 bg-secondary text-center text-light col-2' key={label.id}>
+            {label.name}
+          </div>
+        ))}
       </div>
 
-      <a href='#' className='row'>
+      <a href={issue.user.html_url} className='row'>
         <i className='bi bi-person-circle d-inline-block'>
-          <p className='d-inline-block ms-1'>Username</p>{' '}
+          <p className='d-inline-block ms-1'>{issue.user.login}</p>{' '}
         </i>
       </a>
     </article>
