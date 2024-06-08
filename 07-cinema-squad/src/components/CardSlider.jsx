@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { Carousel } from 'react-bootstrap'
 import MediaCard from './MediaCard'
 
-const CardSlider = ({ mediaList }) => {
-  const [chunkSize, setChunksize] = useState(3)
+const CardSlider = ({ mediaList, genres }) => {
+  const [chunkSize, setChunksize] = useState(4)
 
   useEffect(() => {
     // Function to update the variable value based on window width
@@ -11,7 +11,7 @@ const CardSlider = ({ mediaList }) => {
       if (window.innerWidth > 768) {
         setChunksize(5)
       } else {
-        setChunksize(3)
+        setChunksize(4)
       }
     }
     // Event listener for window resize
@@ -28,10 +28,10 @@ const CardSlider = ({ mediaList }) => {
     for (let i = 0; i < mediaList.length; i += chunkSize) {
       const chunk = mediaList.slice(i, i + chunkSize)
       carouselRows.push(
-        <Carousel.Item>
-          <div className='row justify-content-center'>
+        <Carousel.Item key={i}>
+          <div className='row justify-content-center py-3'>
             {chunk.map(item => (
-              <MediaCard key={item.id} media={item} />
+              <MediaCard key={item.id} media={item} genres={genres} />
             ))}
           </div>
         </Carousel.Item>
@@ -41,7 +41,7 @@ const CardSlider = ({ mediaList }) => {
   }
 
   return (
-    <div className='container mt-5 mb-5'>
+    <div className='container-fluid mt-5 mb-5'>
       <Carousel indicators={false} controls variant='dark'>
         {renderRows()}
       </Carousel>
