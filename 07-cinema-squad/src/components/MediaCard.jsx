@@ -2,9 +2,15 @@ import React from 'react'
 
 const MediaCard = ({ media, genres }) => {
   const loadGenres = () => {
-    console.log(genres)
     const movieGenres = genres.filter(gen => media.genre_ids.includes(gen.id))
-    return movieGenres.map(genre => <p key={genre} className='col text-center bg-primary m-1 text-light rounded-pill align-middle'>{genre.name}</p>)
+    return movieGenres.map(genre => (
+      <p
+        key={genre.name + media.name}
+        className='col text-center bg-primary m-1 text-light rounded-pill align-middle fs-7'
+      >
+        {genre.name}
+      </p>
+    ))
   }
   return (
     <div className='col-3 col-md-2 '>
@@ -20,7 +26,7 @@ const MediaCard = ({ media, genres }) => {
           />
           <h5 className='card-title p-2 fs-5 text-center'>{media.title}</h5>
           <div className='mx-2 row'>{loadGenres()}</div>
-          <p className='card-text'>{media.vote_average}</p>
+          <i className='bi bi-stars text-primary'> {media.vote_average}</i>
         </div>
       </div>
     </div>
