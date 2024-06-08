@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import CardSlider from '../components/CardSlider'
 
 const Home = () => {
   const [movies, setMovies] = useState([])
@@ -17,7 +18,12 @@ const Home = () => {
   return (
     <div>
       <h1>Hello</h1>
-      {movies.map(movie => (<h2 key={movie.id}>{movie.title}</h2>))}
+      {movies.map(movie => (
+        <h2 key={movie.id}>{movie.title}</h2>
+      ))}
+      <div className='container justify-content-center'>
+        <CardSlider mediaList={movies} />
+      </div>
     </div>
   )
 }
