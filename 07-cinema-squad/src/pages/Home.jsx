@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import CardSlider from '../components/CardSlider'
 import MovieCard from '../components/MovieCard'
 import TVCard from '../components/TVCard'
+import PeopleCard from '../components/PeopleCard'
 
 const Home = () => {
   const [movies, setMovies] = useState([])
@@ -10,6 +11,8 @@ const Home = () => {
   const [series, setSeries] = useState([])
   const [seriesGenres, setSeriesGenres] = useState([])
 
+  const [people, setPeople] = useState([])
+
   useEffect(() => {
     const APIKEY = import.meta.env.VITE_MOVIEDB_API_KEY
     const movieCall = `https://api.themoviedb.org/3/trending/movie/day?language=en-US&api_key=${APIKEY}`
@@ -17,6 +20,8 @@ const Home = () => {
 
     const seriesCall = `https://api.themoviedb.org/3/trending/tv/day?language=en-US&api_key=${APIKEY}`
     const seriesGenresCall = `https://api.themoviedb.org/3/genre/tv/list?language=en&api_key=${APIKEY}`
+
+    const peopleCall = `https://api.themoviedb.org/3/trending/person/day?language=en-US&api_key=${APIKEY}`
 
     fetch(movieCall)
       .then(response => response.json())
@@ -37,6 +42,11 @@ const Home = () => {
       .then(response => response.json())
       .then(data => setSeriesGenres(data.genres))
       .catch(err => console.error(err))
+
+    fetch(peopleCall)
+      .then(response => response.json())
+      .then(data => setPeople(data.results))
+      .catch(err => console.error(err))
   }, [])
 
   return (
@@ -46,13 +56,31 @@ const Home = () => {
           <i className='bi bi-film fs-4 col-auto' />
           <p className='mb-0 ms-2 col-auto fs-4'>Featured Movies</p>
         </div>
-        <CardSlider mediaList={movies} genres={movieGenres} CardType={MovieCard} />
+        <CardSlider
+          mediaList={movies}
+          genres={movieGenres}
+          CardType={MovieCard}
+        />
 
         <div className='row justify-content-center align-middle m-1'>
           <i className='bi bi-tv fs-4 col-auto' />
           <p className='mb-0 ms-2 col-auto fs-4'>Featured TV</p>
         </div>
-        <CardSlider mediaList={series} genres={seriesGenres} CardType={TVCard} />
+        <CardSlider
+          mediaList={series}
+          genres={seriesGenres}
+          CardType={TVCard}
+        />
+
+        <div className='row justify-content-center align-middle m-1'>
+          <i className='bi bi-people fs-4 col-auto' />
+          <p className='mb-0 ms-2 col-auto fs-4'>Featured People</p>
+        </div>
+        <CardSlider
+          mediaList={people}
+          genres={seriesGenres}
+          CardType={PeopleCard}
+        />
       </div>
     </div>
   )

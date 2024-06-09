@@ -52,7 +52,7 @@ const MovieCard = ({ media, genres }) => {
       'Nov',
       'Dec'
     ]
-    return <p className='fs-10 text-primary text-center my-1'>{date[2] + ' ' + months[date[1] - 1] + '. ' + date[0]}</p>
+    return <p className='fs-7 text-primary text-center my-1'>{date[2] + ' ' + months[date[1] - 1] + '. ' + date[0]}</p>
   }
   return (
     <div className='col-5 col-md-3 col-lg-2'>

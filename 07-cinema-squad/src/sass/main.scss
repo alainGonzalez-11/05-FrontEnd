@@ -11,13 +11,14 @@ $custome-theme-colors: (
     "primary": #07B9EC,
     "secondary": #FB1558,
     "altPrimary": #07B9ECAA,
+    "tertiary": #70119A,
 );
 
 $custom-font-sizes: (
   7: $font-size-base * 0.85,
-  8: $h2-font-size * 0.75,
-  9: $h3-font-size * 0.65,
-  10: $h4-font-size * 0.5
+  8: $font-size-base * 0.75,
+  9: $font-size-base * 0.65,
+  10: $font-size-base * 0.5
 );
 
 $theme-colors: map-merge($theme-colors, $custome-theme-colors);
