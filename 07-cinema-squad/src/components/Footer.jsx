@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='component bg-dark p-4 mt-5'>
+    <div className='component bg-dark p-4 pt-5'>
       <p className='lead text-center text-light fs-6'>
         © 2024 Alain Gonzalez. Todos los derechos reservados.
       </p>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MovieHeader = ({ data }) => {
+const MovieHeader = ({ data, credits }) => {
   const loadScore = () => {
     const score = Math.round(data.vote_average)
     const scoreIcons = []
@@ -45,28 +45,42 @@ const MovieHeader = ({ data }) => {
   }
   const loadGenres = () => {
     return data.genres.map(genre => (
-      <p
-        key={genre.id}
-        className='btn text-center p-1 px-2 mx-1 border border-2  border-light text-light rounded-pill fs-7'
-      >
+      <p key={genre.id} className='btn btn-outline-light m-1 rounded-pill fs-7'>
         {genre.name}
       </p>
     ))
   }
+  const returnCrew = jobNames => {
+    let responses = []
+    for (let index = 0; index < jobNames.length; index++) {
+      const crewTeam = credits.crew.filter(crew => crew.job === jobNames[index])
+      if (crewTeam.length > 0) {
+        responses = crewTeam
+      }
+    }
+    console.log(responses)
+
+    return responses.map(response => (
+      <div key={response.id} className='text-light text-center fs-7'>
+        <strong>{response.name} </strong>
+      </div>
+    ))
+  }
   return (
     <div className='container-xl bg-light ' style={{ '--bs-bg-opacity': 0.2 }}>
-      <div className='row p-3'>
+      <div className='row p-3 justify-content-around'>
         <img
-          className='col-5 col-lg-3 rounded-4 border-0 shadow'
+          className='col-5 col-lg-3 rounded-4 border-0'
           src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.poster_path}`}
           alt='Movie poster'
         />
-        <div className='container-fluid col-6 col-lg-8 mx-3'>
+        <div className='container-fluid col-6 col-lg-8 mx-3 d-flex flex-column justify-content-around'>
           <div className='row'>
             <div className='col-12 col-lg-8 text-center text-lg-start'>
               <h1 className='fs-3 text-light '>
                 {`${data.title} [${data.release_date.split('-')[0]}]`}
               </h1>
+              div.
               {loadGenres()}
             </div>
             <div className='col-12 col-lg-4'>
@@ -74,9 +88,59 @@ const MovieHeader = ({ data }) => {
               <div className='row'>{loadScore()}</div>
             </div>
           </div>
-          <div className='row'>
-            <div className=' text-light italic fs-4 '>{data.tagline}</div>
+          <div className='row d-none d-sm-block align-self-center'>
+            <div className=' text-light fs-4 mb-3'>
+              <em>{data.tagline}</em>
+            </div>
             <div className='text-light fs-7'>{data.overview}</div>
+          </div>
+          <div className='container-fluid d-none d-md-block justify-content-between'>
+            <div className='row align-items-center'>
+              <div className='col-3'>
+                <div className='text-light text-center fs-8 my-2'>
+                  <u>
+                    <em>Director</em>
+                  </u>
+                </div>
+                <div className='text-light text-center fs-7'>
+                  <strong>
+                    {credits.crew.find(({ job }) => job === 'Director').name}
+                  </strong>
+                </div>
+              </div>
+              <div className='col-3'>
+                <div className='text-light text-center fs-8 my-2'>
+                  <u>
+                    <em>Writer</em>
+                  </u>
+                </div>
+                {returnCrew(['Writer', 'Screenplay'])}
+              </div>
+              <div className='col-3'>
+                <div className='text-light text-center fs-8 my-2'>
+                  <u>
+                    <em>Main cast</em>
+                  </u>
+                </div>
+                {credits.cast.slice(0, 3).map(person => (
+                  <div key={person.id} className='text-light text-center fs-7'>
+                    <strong>{person.name} </strong>
+                  </div>
+                ))}
+              </div>
+              <div className='col-3'>
+                <div className='text-light text-center fs-8 my-2'>
+                  <u>
+                    <em>View entire cast and crew</em>
+                  </u>
+                </div>
+                <div className='text-center'>
+                  <a href='#' className='text-center text-light'>
+                    <i className='bi bi-arrow-down-circle' />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
