@@ -51,7 +51,7 @@ const Home = () => {
 
   return (
     <div>
-      <div className='container-fluid justify-content-center'>
+      <div className='container-fluid justify-content-center mt-3'>
         <div className='row justify-content-center align-middle m-1'>
           <i className='bi bi-film fs-4 col-auto' />
           <p className='mb-0 ms-2 col-auto fs-4'>Featured Movies</p>

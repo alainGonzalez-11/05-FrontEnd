@@ -12,6 +12,7 @@ $custome-theme-colors: (
     "secondary": #FB1558,
     "altPrimary": #07B9ECAA,
     "tertiary": #70119A,
+    "ultra-dark": #00181f,
 );
 
 $custom-font-sizes: (
@@ -21,9 +22,20 @@ $custom-font-sizes: (
   10: $font-size-base * 0.5
 );
 
+.italic {
+  font-style: italic;
+}
+
 $theme-colors: map-merge($theme-colors, $custome-theme-colors);
 
 $font-sizes: map-merge($font-sizes, $custom-font-sizes);
+
+// Define custom font
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+$custom-font: 'Raleway', sans-serif;
+
+// Override Bootstrap font variable
+$font-family-base: $custom-font;
 
 
 @import '../../node_modules/bootstrap/scss/bootstrap';

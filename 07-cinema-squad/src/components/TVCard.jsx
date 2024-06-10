@@ -18,22 +18,22 @@ const MovieCard = ({ media, genres }) => {
     let iconsNumber = 0
     for (let i = 0; i <= score - 2; i = i + 2) {
       scoreIcons.push(
-        <i className='bi bi-star-fill text-secondary col-auto mx-1' key={media.name + '_icon_' + iconsNumber} />
+        <i className='bi bi-star-fill col-auto mx-1' key={media.name + '_icon_' + iconsNumber} />
       )
       iconsNumber++
     }
     if (score % 2 !== 0) {
       scoreIcons.push(
-        <i className='bi bi-star-half text-secondary col-auto mx-1' key={media.name + '_icon_' + iconsNumber} />
+        <i className='bi bi-star-half col-auto mx-1' key={media.name + '_icon_' + iconsNumber} />
       )
       iconsNumber++
     }
     for (let index = iconsNumber; index < 5; index++) {
-      scoreIcons.push(<i className='bi bi-star text-secondary col-auto mx-1' key={media.name + '_icon_' + iconsNumber} />)
+      scoreIcons.push(<i className='bi bi-star col-auto mx-1' key={media.name + '_icon_' + iconsNumber} />)
       iconsNumber++
     }
     return (
-      <div className='d-flex mx-2 justify-content-center'>{scoreIcons}</div>
+      <div className='d-flex mx-2 text-secondary justify-content-center'>{scoreIcons}</div>
     )
   }
   const loadReleaseDate = () => {
