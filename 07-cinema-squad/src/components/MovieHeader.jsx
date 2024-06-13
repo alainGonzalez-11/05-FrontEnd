@@ -58,8 +58,6 @@ const MovieHeader = ({ data, credits }) => {
         responses = crewTeam
       }
     }
-    console.log(responses)
-
     return responses.map(response => (
       <div key={response.id} className='text-light text-center fs-7'>
         <strong>{response.name} </strong>

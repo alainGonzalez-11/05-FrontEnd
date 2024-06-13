@@ -5,7 +5,11 @@ const MediaCarousel = ({ media }) => {
   const renderRows = () => {
     const carouselRows = []
     const chunkSize = 2
-    for (let i = 0; i < media.length; i += chunkSize) {
+    let total = media.length
+    if (total > 6) {
+      total = 6
+    }
+    for (let i = 0; i < total; i += chunkSize) {
       const chunk = media.slice(i, i + chunkSize)
       carouselRows.push(
         <Carousel.Item key={i}>

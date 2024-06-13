@@ -5,63 +5,59 @@ import MediaSection from '../components/MediaSection'
 
 const MovieDetails = () => {
   const { id } = useParams()
-  const [movieDetails, setMovieDetails] = useState(null)
-  const [movieCredits, setMovieCredits] = useState(null)
-  const [movieVideos, setMovieVideos] = useState(null)
-  const [loadingDetails, setLoadingDetails] = useState(true)
-  const [loadingCredits, setLoadingCredits] = useState(true)
-  const [loadingVideos, setLoadingVideos] = useState(true)
+  const [movieInfo, setMovieInfo] = useState({})
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const language = 'en-US'
+
+  const fetchData = url => {
+    return fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        return response.json()
+      })
+      .catch(error => {
+        console.error(error)
+        setError(error)
+        setLoading(false)
+      })
+  }
+
   useEffect(() => {
-    setLoadingCredits(true)
-    setLoadingDetails(true)
-    setLoadingVideos(true)
+    setLoading(true)
     setError(null)
 
     const APIKEY = import.meta.env.VITE_MOVIEDB_API_KEY
-    const movieDetailsCall = `https://api.themoviedb.org/3/movie/${id}?language=${language}&api_key=${APIKEY}`
-    const movieCreditsCall = `https://api.themoviedb.org/3/movie/${id}/credits?language=${language}&api_key=${APIKEY}`
-    const movieVideoCall = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${APIKEY}`
+    const data = {}
 
-    fetch(movieDetailsCall)
-      .then(res => res.json())
-      .then(data => {
-        setMovieDetails(data)
-        setLoadingDetails(false)
-      })
-      .catch(err => {
-        console.error(err)
-        setError(err)
-        setLoadingDetails(false)
-      })
+    const endPointNames = ['details', 'credits', 'videos']
 
-    fetch(movieCreditsCall)
-      .then(res => res.json())
-      .then(data => {
-        setMovieCredits(data)
-        setLoadingCredits(false)
-      })
-      .catch(err => {
-        console.error(err)
-        setError(err)
-        setLoadingCredits(false)
-      })
+    const apiCalls = [
+      `https://api.themoviedb.org/3/movie/${id}?language=${language}&api_key=${APIKEY}`,
+      `https://api.themoviedb.org/3/movie/${id}/credits?language=${language}&api_key=${APIKEY}`,
+      `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${APIKEY}`
+    ]
 
-    fetch(movieVideoCall)
-      .then(res => res.json())
-      .then(data => {
-        setMovieVideos(data.results)
-        setLoadingVideos(false)
+    Promise.all(apiCalls.map(endpoint => fetchData(endpoint)))
+      .then(results => {
+        results.forEach((result, index) => {
+          data[endPointNames[index]] = result
+        })
+        setLoading(false)
+        setMovieInfo(data)
       })
-      .catch(err => {
-        console.error(err)
-        setError(err)
-        setLoadingVideos(false)
+      .catch(error => {
+        console.error('One or more API calls failed:', error)
       })
   }, [id])
 
-  if (loadingCredits || loadingDetails || loadingVideos) {
+  // ERASE
+  // ERASE
+  // ERASE
+
+  if (loading) {
     return <div>Loading...</div>
   }
 
@@ -70,8 +66,8 @@ const MovieDetails = () => {
   }
   return (
     <div className='bg-ultra-dark'>
-      <MovieHeader data={movieDetails} credits={movieCredits} />
-      <MediaSection videos={movieVideos} />
+      <MovieHeader data={movieInfo.details} credits={movieInfo.credits} />
+      <MediaSection videos={movieInfo.videos.results} />
     </div>
   )
 }
