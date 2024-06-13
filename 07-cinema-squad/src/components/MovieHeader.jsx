@@ -80,7 +80,6 @@ const MovieHeader = ({ data, credits }) => {
               <h1 className='fs-3 text-light '>
                 {`${data.title} [${data.release_date.split('-')[0]}]`}
               </h1>
-              div.
               {loadGenres()}
             </div>
             <div className='col-12 col-lg-4'>
