@@ -1,10 +1,29 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { Carousel } from 'react-bootstrap'
 
-const MediaCarousel = ({ media }) => {
+const VideoCarousel = ({ media }) => {
+  const [chunkSize, setChunksize] = useState(2)
+
+  useEffect(() => {
+    // Function to update the variable value based on window width
+    const updateVariableValue = () => {
+      if (window.innerWidth < 768) {
+        setChunksize(1)
+      } else {
+        setChunksize(2)
+      }
+    }
+    // Event listener for window resize
+    window.addEventListener('resize', updateVariableValue)
+
+    // Cleanup function to remove event listener when component unmounts
+    return () => {
+      window.removeEventListener('resize', updateVariableValue)
+    }
+  }, [])
+
   const renderRows = () => {
     const carouselRows = []
-    const chunkSize = 2
     let total = media.length
     if (total > 6) {
       total = 6
@@ -42,4 +61,4 @@ const MediaCarousel = ({ media }) => {
   )
 }
 
-export default MediaCarousel
+export default VideoCarousel

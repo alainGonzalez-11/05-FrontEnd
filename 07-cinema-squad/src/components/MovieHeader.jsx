@@ -69,7 +69,7 @@ const MovieHeader = ({ data, credits }) => {
       <div className='row p-3 justify-content-around'>
         <img
           className='col-5 col-lg-3 rounded-4 border-0'
-          src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.poster_path}`}
+          src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
           alt='Movie poster'
         />
         <div className='container-fluid col-6 col-lg-8 mx-3 d-flex flex-column justify-content-around'>

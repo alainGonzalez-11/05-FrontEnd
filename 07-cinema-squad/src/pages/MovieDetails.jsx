@@ -32,12 +32,13 @@ const MovieDetails = () => {
     const APIKEY = import.meta.env.VITE_MOVIEDB_API_KEY
     const data = {}
 
-    const endPointNames = ['details', 'credits', 'videos']
+    const endPointNames = ['details', 'credits', 'videos', 'images']
 
     const apiCalls = [
       `https://api.themoviedb.org/3/movie/${id}?language=${language}&api_key=${APIKEY}`,
       `https://api.themoviedb.org/3/movie/${id}/credits?language=${language}&api_key=${APIKEY}`,
-      `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${APIKEY}`
+      `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${APIKEY}`,
+      `https://api.themoviedb.org/3/movie/${id}/images?api_key=${APIKEY}`
     ]
 
     Promise.all(apiCalls.map(endpoint => fetchData(endpoint)))
@@ -66,8 +67,17 @@ const MovieDetails = () => {
   }
   return (
     <div className='bg-ultra-dark'>
-      <MovieHeader data={movieInfo.details} credits={movieInfo.credits} />
-      <MediaSection videos={movieInfo.videos.results} />
+      <MovieHeader
+        data={movieInfo.details}
+        credits={movieInfo.credits}
+        id='header'
+      />
+      <MediaSection
+        videos={movieInfo.videos.results}
+        images={movieInfo.images}
+        id='media'
+      />
+      
     </div>
   )
 }
