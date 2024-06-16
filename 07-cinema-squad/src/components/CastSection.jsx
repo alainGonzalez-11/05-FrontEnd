@@ -35,7 +35,7 @@ const CastSection = ({ credits }) => {
                 </thead>
                 <tbody>
                   {credits.cast.map((item, index) => (
-                    <tr key={item.id}>
+                    <tr key={item.id + '_cast_' + index}>
                       <th scope='row'>{index + 1}</th>
                       <td>{item.name}</td>
                       <td>{item.character}</td>
@@ -76,7 +76,7 @@ const CastSection = ({ credits }) => {
                 </thead>
                 <tbody>
                   {credits.crew.map((item, index) => (
-                    <tr key={item.id}>
+                    <tr key={item.id + '_crew_' + index}>
                       <td>{item.name}</td>
                       <td>{item.department}</td>
                       <td>{item.job}</td>

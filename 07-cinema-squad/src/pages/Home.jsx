@@ -76,11 +76,11 @@ const Home = () => {
           <i className='bi bi-people fs-4 col-auto' />
           <p className='mb-0 ms-2 col-auto fs-4'>Featured People</p>
         </div>
-        <CardSlider
+        {/* <CardSlider
           mediaList={people}
           genres={seriesGenres}
           CardType={PeopleCard}
-        />
+        /> */}
       </div>
     </div>
   )

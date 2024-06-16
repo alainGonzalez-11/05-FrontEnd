@@ -9,7 +9,7 @@ const Footer = () => {
 
       <p className='lead text-center text-light fs-6'>
         La información presentada en esta página web proviene de The Movie
-        Database (TMDb).
+        Database (TMDb). La información de disponibilidad de proveedores de streaming proviene de JustWatch a través de TMDb.
       </p>
 
       <p className='lead text-center text-light fs-6'>

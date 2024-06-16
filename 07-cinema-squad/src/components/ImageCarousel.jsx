@@ -32,15 +32,13 @@ const ImageCarousel = ({ media, items }) => {
       const chunk = media.slice(i, i + chunkSize)
       carouselRows.push(
         <Carousel.Item key={i}>
-          <div className='row justify-content-center py-3'>
-            {chunk.map(item => (
+          <div className='row justify-content-center py-3' key={i + 'car'}>
+            {chunk.map((item, index) => (
               <img
-                key={item.id}
+                key={item.id + '-' + index}
                 className={`rounded-4 border-0 col-${Math.floor(
                   12 / items[1]
-                )} col-md-${Math.floor(
-                  12 / items[0]
-                )}`}
+                )} col-md-${Math.floor(12 / items[0])}`}
                 src={`https://image.tmdb.org/t/p/original/${item.file_path}`}
                 alt='Movie poster'
               />

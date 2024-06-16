@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MovieCard = ({ media, genres }) => {
+const PeopleCard = ({ media, genres }) => {
   return (
     <div className='col-5 col-md-3 col-lg-2'>
       <div
@@ -23,4 +23,4 @@ const MovieCard = ({ media, genres }) => {
   )
 }
 
-export default MovieCard
+export default PeopleCard
