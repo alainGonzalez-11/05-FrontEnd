@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import MovieHeader from '../components/MovieHeader'
 import MediaSection from '../components/MediaSection'
+import CastSection from '../components/CastSection'
+import Providers from '../components/Providers'
 
 const MovieDetails = () => {
   const { id } = useParams()
@@ -32,13 +34,14 @@ const MovieDetails = () => {
     const APIKEY = import.meta.env.VITE_MOVIEDB_API_KEY
     const data = {}
 
-    const endPointNames = ['details', 'credits', 'videos', 'images']
+    const endPointNames = ['details', 'credits', 'videos', 'images', 'providers']
 
     const apiCalls = [
       `https://api.themoviedb.org/3/movie/${id}?language=${language}&api_key=${APIKEY}`,
       `https://api.themoviedb.org/3/movie/${id}/credits?language=${language}&api_key=${APIKEY}`,
       `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${APIKEY}`,
-      `https://api.themoviedb.org/3/movie/${id}/images?api_key=${APIKEY}`
+      `https://api.themoviedb.org/3/movie/${id}/images?api_key=${APIKEY}`,
+      `https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=${APIKEY}`
     ]
 
     Promise.all(apiCalls.map(endpoint => fetchData(endpoint)))
@@ -72,12 +75,13 @@ const MovieDetails = () => {
         credits={movieInfo.credits}
         id='header'
       />
+      <Providers />
       <MediaSection
         videos={movieInfo.videos.results}
         images={movieInfo.images}
         id='media'
       />
-      
+      <CastSection credits={movieInfo.credits} />
     </div>
   )
 }
