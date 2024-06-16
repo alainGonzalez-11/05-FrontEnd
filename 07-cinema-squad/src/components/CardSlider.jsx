@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Carousel } from 'react-bootstrap'
 
-const CardSlider = ({ mediaList, genres, CardType }) => {
+const CardSlider = ({ mediaList, CardType }) => {
   const [chunkSize, setChunksize] = useState(5)
 
   useEffect(() => {
@@ -35,7 +35,6 @@ const CardSlider = ({ mediaList, genres, CardType }) => {
               <CardType
                 key={item.id}
                 media={item}
-                genres={genres}
               />
             ))}
           </div>

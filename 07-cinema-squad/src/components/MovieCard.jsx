@@ -1,17 +1,6 @@
 import React from 'react'
 
-const MovieCard = ({ media, genres }) => {
-  // const loadGenres = () => {
-  //   const movieGenres = genres.filter(gen => media.genre_ids.includes(gen.id))
-  //   return movieGenres.map(genre => (
-  //     <p
-  //       key={genre.name + media.name}
-  //       className='col text-center bg-primary m-1 text-light rounded-pill align-middle fs-7'
-  //     >
-  //       {genre.name}
-  //     </p>
-  //   ))
-  // }
+const MovieCard = ({ media }) => {
   const loadScore = () => {
     const score = Math.round(media.vote_average)
     const scoreIcons = []
@@ -44,7 +33,9 @@ const MovieCard = ({ media, genres }) => {
       iconsNumber++
     }
     return (
-      <div className='d-flex mx-2 text-primary justify-content-center'>{scoreIcons}</div>
+      <div className='d-flex mx-2 text-primary justify-content-center'>
+        {scoreIcons}
+      </div>
     )
   }
   const loadReleaseDate = () => {
@@ -76,19 +67,18 @@ const MovieCard = ({ media, genres }) => {
         style={{ '--bs-bg-opacity': 0.1 }}
       >
         <div className='card-body p-0'>
-          <img
-            className='card-img-top rounded-4'
-            src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${media.poster_path}`}
-            alt='Card image cap'
-          />
-          <a href={`/movie/${media.id}`}>
-            <h5 className='card-title p-1 lead text-center m-1'>
+          <a href={`/movie/${media.id}`} style={{ 'text-decoration': 'none' }}>
+            <img
+              className='card-img-top rounded-4'
+              src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${media.poster_path}`}
+              alt='Card image cap'
+            />
+            <h5 className='card-title p-1 lead text-center text-dark m-1 fw-bold'>
               {media.title}
             </h5>
           </a>
           {loadScore()}
           {loadReleaseDate()}
-          {/* <div className='mx-2 row'>{loadGenres()}</div> */}
         </div>
       </div>
     </div>

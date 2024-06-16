@@ -7,7 +7,7 @@ import Providers from '../components/Providers'
 import MovieCard from '../components/MovieCard'
 import RecommendationSection from '../components/RecommendationSection'
 
-const MovieDetails = () => {
+const TVDetails = () => {
   const { id } = useParams()
   const [movieInfo, setMovieInfo] = useState({})
   const [loading, setLoading] = useState(true)
@@ -103,4 +103,4 @@ const MovieDetails = () => {
   )
 }
 
-export default MovieDetails
+export default TVDetails

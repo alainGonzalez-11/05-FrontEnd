@@ -11,6 +11,13 @@ const CastSection = ({ movieInfo, Card }) => {
         genres={movieInfo.genres}
         CardType={Card}
       />
+      <h2>Similar</h2>
+      <hr className='hr hr-blurry' />
+      <CardSlider
+        mediaList={movieInfo.similar.results}
+        genres={movieInfo.genres}
+        CardType={Card}
+      />
     </div>
   )
 }

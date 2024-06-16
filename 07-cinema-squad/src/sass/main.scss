@@ -38,6 +38,9 @@ $custom-font-sizes: (
   height: 100%;
   border: 0;
 }
+.links {
+  text-decoration: none !important;
+}
 
 $theme-colors: map-merge($theme-colors, $custome-theme-colors);
 

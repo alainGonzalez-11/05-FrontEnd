@@ -93,7 +93,7 @@ const CastSection = ({ credits }) => {
 
   return (
     <div className='container-xl bg-light'>
-      <div className='row p-3 px-4 justify-content-around'>
+      <div className='row p-3 px-4 justify-content-around' id='credits'>
         <h2>Credits</h2>
         <hr className='hr hr-blurry' />
         <CardSlider

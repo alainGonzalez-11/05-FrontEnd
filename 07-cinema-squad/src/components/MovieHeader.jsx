@@ -86,18 +86,16 @@ const MovieHeader = ({ data, credits }) => {
             </div>
           </div>
           <div className='row d-none d-sm-block align-self-center'>
-            <div className=' text-light fs-4 mb-3'>
-              <em>{data.tagline}</em>
+            <div className=' text-light fs-4 mb-3 fst-italic'>
+              {data.tagline}
             </div>
             <div className='text-light fs-7'>{data.overview}</div>
           </div>
           <div className='container-fluid d-none d-md-block justify-content-between'>
             <div className='row align-items-center'>
               <div className='col-3'>
-                <div className='text-light text-center fs-8 my-2'>
-                  <u>
-                    <em>Director</em>
-                  </u>
+                <div className='text-light text-center fs-8 my-2 text-decoration-underline fst-italic'>
+                  Director
                 </div>
                 <div className='text-light text-center fs-7'>
                   <strong>
@@ -106,18 +104,14 @@ const MovieHeader = ({ data, credits }) => {
                 </div>
               </div>
               <div className='col-3'>
-                <div className='text-light text-center fs-8 my-2'>
-                  <u>
-                    <em>Writer</em>
-                  </u>
+                <div className='text-light text-center fs-8 my-2 text-decoration-underline fst-italic'>
+                  Writer
                 </div>
                 {returnCrew(['Writer', 'Screenplay'])}
               </div>
               <div className='col-3'>
-                <div className='text-light text-center fs-8 my-2'>
-                  <u>
-                    <em>Main cast</em>
-                  </u>
+                <div className='text-light text-center fs-8 my-2 text-decoration-underline fst-italic'>
+                  Main cast
                 </div>
                 {credits.cast.slice(0, 3).map(person => (
                   <div key={person.id} className='text-light text-center fs-7'>
@@ -126,13 +120,11 @@ const MovieHeader = ({ data, credits }) => {
                 ))}
               </div>
               <div className='col-3'>
-                <div className='text-light text-center fs-8 my-2'>
-                  <u>
-                    <em>View entire cast and crew</em>
-                  </u>
+                <div className='text-light text-center fs-8 my-2 text-decoration-underline fst-italic'>
+                  View entire cast and crew
                 </div>
                 <div className='text-center'>
-                  <a href='#' className='text-center text-light'>
+                  <a href='#credits' className='text-center text-light'>
                     <i className='bi bi-arrow-down-circle' />
                   </a>
                 </div>
