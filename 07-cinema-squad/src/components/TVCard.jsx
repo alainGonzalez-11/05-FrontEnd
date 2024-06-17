@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MovieCard = ({ media, genres }) => {
+const TVCard = ({ media, genres }) => {
   // const loadGenres = () => {
   //   const movieGenres = genres.filter(gen => media.genre_ids.includes(gen.id))
   //   return movieGenres.map(genre => (
@@ -18,22 +18,35 @@ const MovieCard = ({ media, genres }) => {
     let iconsNumber = 0
     for (let i = 0; i <= score - 2; i = i + 2) {
       scoreIcons.push(
-        <i className='bi bi-star-fill col-auto mx-1' key={media.name + '_icon_' + iconsNumber} />
+        <i
+          className='bi bi-star-fill col-auto mx-1'
+          key={media.name + '_icon_' + iconsNumber}
+        />
       )
       iconsNumber++
     }
     if (score % 2 !== 0) {
       scoreIcons.push(
-        <i className='bi bi-star-half col-auto mx-1' key={media.name + '_icon_' + iconsNumber} />
+        <i
+          className='bi bi-star-half col-auto mx-1'
+          key={media.name + '_icon_' + iconsNumber}
+        />
       )
       iconsNumber++
     }
     for (let index = iconsNumber; index < 5; index++) {
-      scoreIcons.push(<i className='bi bi-star col-auto mx-1' key={media.name + '_icon_' + iconsNumber} />)
+      scoreIcons.push(
+        <i
+          className='bi bi-star col-auto mx-1'
+          key={media.name + '_icon_' + iconsNumber}
+        />
+      )
       iconsNumber++
     }
     return (
-      <div className='d-flex mx-2 text-secondary justify-content-center'>{scoreIcons}</div>
+      <div className='d-flex mx-2 text-secondary justify-content-center'>
+        {scoreIcons}
+      </div>
     )
   }
   const loadReleaseDate = () => {
@@ -52,7 +65,16 @@ const MovieCard = ({ media, genres }) => {
       'Nov',
       'Dec'
     ]
-    return <p className='fs-7 text-secondary text-center my-1'>{'First airing: ' + date[2] + ' ' + months[date[1] - 1] + '. ' + date[0]}</p>
+    return (
+      <p className='fs-7 text-secondary text-center my-1'>
+        {'First airing: ' +
+          date[2] +
+          ' ' +
+          months[date[1] - 1] +
+          '. ' +
+          date[0]}
+      </p>
+    )
   }
   return (
     <div className='col-5 col-md-3 col-lg-2'>
@@ -61,13 +83,16 @@ const MovieCard = ({ media, genres }) => {
         style={{ '--bs-bg-opacity': 0.1 }}
       >
         <div className='card-body p-0'>
-          <img
-            className='card-img-top rounded-4'
-            src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${media.poster_path}`}
-            alt='Card image cap'
-          />
-          <h5 className='card-title p-1 lead text-center'>{media.name}</h5>
-
+          <a href={`/tv/${media.id}`} style={{ textDecoration: 'none' }}>
+            <img
+              className='card-img-top rounded-4'
+              src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${media.poster_path}`}
+              alt='Card image cap'
+            />
+            <h5 className='card-title p-1 lead text-center text-dark m-1 fw-bold'>
+              {media.name}
+            </h5>
+          </a>
           {loadScore()}
           {loadReleaseDate()}
           {/* <div className='mx-2 row'>{loadGenres()}</div> */}
@@ -77,4 +102,4 @@ const MovieCard = ({ media, genres }) => {
   )
 }
 
-export default MovieCard
+export default TVCard

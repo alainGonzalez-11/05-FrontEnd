@@ -67,7 +67,7 @@ const MovieCard = ({ media }) => {
         style={{ '--bs-bg-opacity': 0.1 }}
       >
         <div className='card-body p-0'>
-          <a href={`/movie/${media.id}`} style={{ 'text-decoration': 'none' }}>
+          <a href={`/movie/${media.id}`} style={{ textDecoration: 'none' }}>
             <img
               className='card-img-top rounded-4'
               src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${media.poster_path}`}

@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import MovieHeader from '../components/MovieHeader'
+import TVHeader from '../components/TVHeader'
 import MediaSection from '../components/MediaSection'
 import CastSection from '../components/CastSection'
 import Providers from '../components/Providers'
-import MovieCard from '../components/MovieCard'
+import TVCard from '../components/TVCard'
 import RecommendationSection from '../components/RecommendationSection'
 
 const TVDetails = () => {
   const { id } = useParams()
-  const [movieInfo, setMovieInfo] = useState({})
+  const [tvInfo, setTvInfo] = useState({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const language = 'en-US'
@@ -48,14 +48,14 @@ const TVDetails = () => {
     ]
 
     const apiCalls = [
-      `https://api.themoviedb.org/3/movie/${id}?language=${language}&api_key=${APIKEY}`,
-      `https://api.themoviedb.org/3/movie/${id}/credits?language=${language}&api_key=${APIKEY}`,
-      `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${APIKEY}`,
-      `https://api.themoviedb.org/3/movie/${id}/images?api_key=${APIKEY}`,
-      `https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=${APIKEY}`,
-      `https://api.themoviedb.org/3/movie/${id}/recommendations?language=en-US&page=1&api_key=${APIKEY}`,
-      `https://api.themoviedb.org/3/genre/movie/list?language=en&api_key=${APIKEY}`,
-      `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1&api_key=${APIKEY}`
+      `https://api.themoviedb.org/3/tv/${id}?language=${language}&api_key=${APIKEY}`,
+      `https://api.themoviedb.org/3/tv/${id}/credits?language=${language}&api_key=${APIKEY}`,
+      `https://api.themoviedb.org/3/tv/${id}/videos?language=en-US&api_key=${APIKEY}`,
+      `https://api.themoviedb.org/3/tv/${id}/images?api_key=${APIKEY}`,
+      `https://api.themoviedb.org/3/tv/${id}/watch/providers?api_key=${APIKEY}`,
+      `https://api.themoviedb.org/3/tv/${id}/recommendations?language=en-US&page=1&api_key=${APIKEY}`,
+      `https://api.themoviedb.org/3/genre/tv/list?language=en&api_key=${APIKEY}`,
+      `https://api.themoviedb.org/3/tv/${id}/similar?language=en-US&page=1&api_key=${APIKEY}`
     ]
 
     Promise.all(apiCalls.map(endpoint => fetchData(endpoint)))
@@ -64,7 +64,7 @@ const TVDetails = () => {
           data[endPointNames[index]] = result
         })
         setLoading(false)
-        setMovieInfo(data)
+        setTvInfo(data)
       })
       .catch(error => {
         console.error('One or more API calls failed:', error)
@@ -72,8 +72,8 @@ const TVDetails = () => {
   }, [id])
 
   const addProviders = () => {
-    if (movieInfo.providers.results.US !== undefined) {
-      return <Providers data={movieInfo.providers.results.US} />
+    if (tvInfo.providers.results.US !== undefined) {
+      return <Providers data={tvInfo.providers.results.US} />
     }
   }
 
@@ -86,19 +86,19 @@ const TVDetails = () => {
   }
   return (
     <div className='bg-ultra-dark'>
-      <MovieHeader
-        data={movieInfo.details}
-        credits={movieInfo.credits}
+      <TVHeader
+        data={tvInfo.details}
+        credits={tvInfo.credits}
         id='header'
       />
       {addProviders()}
       <MediaSection
-        videos={movieInfo.videos.results}
-        images={movieInfo.images}
+        videos={tvInfo.videos.results}
+        images={tvInfo.images}
         id='media'
       />
-      <CastSection credits={movieInfo.credits} />
-      <RecommendationSection movieInfo={movieInfo} Card={MovieCard} />
+      <CastSection credits={tvInfo.credits} />
+      <RecommendationSection movieInfo={tvInfo} Card={TVCard} />
     </div>
   )
 }
