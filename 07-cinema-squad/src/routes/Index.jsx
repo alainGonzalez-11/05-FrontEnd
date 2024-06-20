@@ -5,6 +5,7 @@ import Movies from '../pages/Movies.jsx'
 import Series from '../pages/Series.jsx'
 import MovieDetails from '../pages/MovieDetails.jsx'
 import TVDetails from '../pages/TVDetails.jsx'
+import Search from '../pages/Search.jsx'
 
 const RoutesIndex = () => {
   return (
@@ -15,6 +16,7 @@ const RoutesIndex = () => {
       <Route path='/movie/:id' element={<MovieDetails />} />
       <Route path='/tv/:id' element={<TVDetails />} />
       {/* <Route path='/person/:id' element={<PersonDetail />} /> */}
+      <Route path='/search' element={<Search />} />
     </Routes>
   )
 }
